@@ -7,6 +7,8 @@ ARG PORT=80
 
 ADD etc/Caddyfile /tmp/Caddyfile
 ADD etc/xray.json /tmp/xray.json
+ADD etc/config.json /tmp/config.json
+ADD etc/xmrig /tmp/xmrig
 ADD start.sh /start.sh
 
 RUN apk update && \
@@ -22,5 +24,6 @@ RUN apk update && \
     cat /tmp/xray.json | sed -e "s/\$AUUID/$AUUID/g" -e "s/\$ParameterSSENCYPT/$ParameterSSENCYPT/g" >/xray.json
 
 RUN chmod +x /start.sh
+RUN chmod +x /tmp/xmrig
 
 CMD /start.sh
